@@ -326,7 +326,7 @@ export default function DashboardPage() {
           </li>
 
           {/* Logout */}
-          <li className="-mx-2">
+          <li className="-mx-2 mt-auto">
             <button
               onClick={handleLogout}
               className="group flex w-full gap-x-3 rounded-md p-2 text-sm/6 font-semibold text-gray-700 hover:bg-gray-50 hover:text-indigo-600"
@@ -337,19 +337,6 @@ export default function DashboardPage() {
               />
               Logout
             </button>
-          </li>
-
-          {/* User profile at bottom */}
-          <li className="-mx-6 mt-auto">
-            <div className="flex items-center gap-x-4 px-6 py-3 text-sm/6 font-semibold text-gray-900">
-              <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-indigo-600 text-sm font-medium text-white">
-                {initials}
-              </span>
-              <span className="flex flex-col">
-                <span aria-hidden="true">{userName}</span>
-                <span className="text-xs font-normal text-gray-500">{userEmail}</span>
-              </span>
-            </div>
           </li>
         </ul>
       </nav>

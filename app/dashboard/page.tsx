@@ -305,11 +305,10 @@ export default function DashboardPage() {
     <>
       <div className="flex h-16 shrink-0 items-center">
         <img
-          alt="FW ERP"
-          src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=600"
+          alt="Frameworks"
+          src="/frameworks-logo.svg"
           className="h-8 w-auto"
         />
-        <span className="ml-3 text-lg font-semibold text-gray-900">Frameworks</span>
       </div>
       <nav className="flex flex-1 flex-col">
         <ul role="list" className="flex flex-1 flex-col gap-y-7">
@@ -403,7 +402,9 @@ export default function DashboardPage() {
           <span className="sr-only">Open sidebar</span>
           <Bars3Icon aria-hidden="true" className="size-6" />
         </button>
-        <div className="flex-1 text-sm/6 font-semibold text-gray-900">Frameworks</div>
+        <div className="flex-1">
+          <img alt="Frameworks" src="/frameworks-logo.svg" className="h-6 w-auto" />
+        </div>
         <button type="button" className="-m-2.5 p-2.5 text-gray-400 hover:text-gray-500">
           <span className="sr-only">View notifications</span>
           <BellIcon aria-hidden="true" className="size-6" />
@@ -489,7 +490,7 @@ export default function DashboardPage() {
       </main>
 
       {/* Secondary column on right */}
-      <aside className="fixed inset-y-0 right-0 hidden w-96 overflow-y-auto border-l border-gray-200 px-4 py-6 sm:px-6 lg:px-8 xl:block">
+      <aside className="fixed top-16 bottom-0 right-0 hidden w-96 overflow-y-auto border-l border-gray-200 px-4 py-6 sm:px-6 lg:px-8 xl:block">
         <h3 className="text-sm font-semibold text-gray-900">Recent Activity</h3>
         <p className="mt-2 text-sm text-gray-500">No recent activity to display.</p>
       </aside>

@@ -19,7 +19,7 @@ import {
   MagnifyingGlassIcon,
   XMarkIcon,
 } from '@heroicons/react/24/outline'
-import { ChevronRightIcon } from '@heroicons/react/20/solid'
+import { ArrowDownIcon, ArrowUpIcon, ChevronRightIcon } from '@heroicons/react/20/solid'
 import {
   HomeIcon,
   ShoppingCartIcon,
@@ -35,6 +35,12 @@ import {
   Cog6ToothIcon,
   UserIcon,
   ArrowRightStartOnRectangleIcon,
+  ChartBarIcon,
+  PlusCircleIcon,
+  DocumentTextIcon,
+  ReceiptPercentIcon,
+  WrenchScrewdriverIcon,
+  UsersIcon,
 } from '@heroicons/react/24/outline'
 
 type NavChild = {
@@ -187,6 +193,37 @@ const bottomNav: NavItem[] = [
   },
 ]
 
+const dashboardStats = [
+  { id: 1, name: 'Revenue (MTD)', stat: '$284,391', icon: CurrencyDollarIcon, change: '12.5%', changeType: 'increase' as const, color: 'bg-green-500' },
+  { id: 2, name: 'Sales Orders', stat: '1,247', icon: ShoppingCartIcon, change: '8.2%', changeType: 'increase' as const, color: 'bg-primary-400' },
+  { id: 3, name: 'Purchase Orders', stat: '342', icon: ClipboardDocumentListIcon, change: '3.1%', changeType: 'decrease' as const, color: 'bg-amber-500' },
+  { id: 4, name: 'Inventory Value', stat: '$1.2M', icon: CubeIcon, change: '2.4%', changeType: 'increase' as const, color: 'bg-blue-500' },
+  { id: 5, name: 'Outstanding AR', stat: '$127,450', icon: BanknotesIcon, change: '5.7%', changeType: 'decrease' as const, color: 'bg-rose-500' },
+  { id: 6, name: 'Dispatches Today', stat: '48', icon: TruckIcon, change: '15.3%', changeType: 'increase' as const, color: 'bg-purple-500' },
+]
+
+const quickLinks = [
+  { name: 'New Sales Order', initials: 'SO', href: '#', description: 'Create a sales order', bgColor: 'bg-primary-500', icon: PlusCircleIcon },
+  { name: 'Customer Dashboard', initials: 'CD', href: '#', description: 'View customer accounts', bgColor: 'bg-green-600', icon: UsersIcon },
+  { name: 'Invoice Entry', initials: 'IE', href: '#', description: 'Enter supplier invoices', bgColor: 'bg-amber-600', icon: DocumentTextIcon },
+  { name: 'Price Inquiry', initials: 'PI', href: '#', description: 'Check product pricing', bgColor: 'bg-rose-600', icon: ReceiptPercentIcon },
+  { name: 'Inventory Lookup', initials: 'IL', href: '#', description: 'Search stock levels', bgColor: 'bg-blue-600', icon: CubeIcon },
+  { name: 'Financial Reports', initials: 'FR', href: '#', description: 'Run financial reports', bgColor: 'bg-purple-600', icon: ChartBarIcon },
+  { name: 'Production Dashboard', initials: 'PD', href: '#', description: 'View production status', bgColor: 'bg-cyan-600', icon: WrenchScrewdriverIcon },
+  { name: 'GL Journal Entry', initials: 'GL', href: '#', description: 'Post journal entries', bgColor: 'bg-teal-600', icon: CalculatorIcon },
+]
+
+const recentActivity = [
+  { id: 1, action: 'Sales Order #4521 created', user: 'Sarah Chen', time: '2 min ago', type: 'sales' },
+  { id: 2, action: 'Payment received — Inv #3892', user: 'System', time: '15 min ago', type: 'payment' },
+  { id: 3, action: 'Purchase Order #1204 approved', user: 'Mark Thompson', time: '32 min ago', type: 'purchase' },
+  { id: 4, action: 'Stock adjustment — SKU WH-4410', user: 'James Liu', time: '1 hr ago', type: 'inventory' },
+  { id: 5, action: 'Customer account updated — Acme Corp', user: 'Sarah Chen', time: '1 hr ago', type: 'customer' },
+  { id: 6, action: 'Dispatch run #89 completed', user: 'Driver - Route A', time: '2 hr ago', type: 'dispatch' },
+  { id: 7, action: 'Credit Memo #CM-221 issued', user: 'Amy Rodriguez', time: '3 hr ago', type: 'sales' },
+  { id: 8, action: 'Bank reconciliation completed', user: 'Finance Team', time: '4 hr ago', type: 'finance' },
+]
+
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ')
 }
@@ -210,15 +247,15 @@ function SidebarNavExpanded({ items }: { items: NavItem[] }) {
               href={item.href}
               className={classNames(
                 item.current
-                  ? 'bg-gray-50 text-indigo-600'
-                  : 'text-gray-700 hover:bg-gray-50 hover:text-indigo-600',
+                  ? 'bg-gray-50 text-primary-500'
+                  : 'text-gray-700 hover:bg-gray-50 hover:text-primary-500',
                 'group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold',
               )}
             >
               <item.icon
                 aria-hidden="true"
                 className={classNames(
-                  item.current ? 'text-indigo-600' : 'text-gray-400 group-hover:text-indigo-600',
+                  item.current ? 'text-primary-500' : 'text-gray-400 group-hover:text-primary-500',
                   'size-6 shrink-0',
                 )}
               />
@@ -228,14 +265,14 @@ function SidebarNavExpanded({ items }: { items: NavItem[] }) {
             <Disclosure as="div">
               <DisclosureButton
                 className={classNames(
-                  item.current ? 'bg-gray-50 text-indigo-600' : 'text-gray-700 hover:bg-gray-50 hover:text-indigo-600',
+                  item.current ? 'bg-gray-50 text-primary-500' : 'text-gray-700 hover:bg-gray-50 hover:text-primary-500',
                   'group flex w-full items-center gap-x-3 rounded-md p-2 text-left text-sm/6 font-semibold',
                 )}
               >
                 <item.icon
                   aria-hidden="true"
                   className={classNames(
-                    item.current ? 'text-indigo-600' : 'text-gray-400 group-hover:text-indigo-600',
+                    item.current ? 'text-primary-500' : 'text-gray-400 group-hover:text-primary-500',
                     'size-6 shrink-0',
                   )}
                 />
@@ -250,7 +287,7 @@ function SidebarNavExpanded({ items }: { items: NavItem[] }) {
                   <li key={subItem.name}>
                     <a
                       href={subItem.href}
-                      className="block rounded-md py-2 pr-2 pl-11 text-sm/6 text-gray-700 hover:bg-gray-50 hover:text-indigo-600"
+                      className="block rounded-md py-2 pr-2 pl-11 text-sm/6 text-gray-700 hover:bg-gray-50 hover:text-primary-500"
                     >
                       {subItem.name}
                     </a>
@@ -276,15 +313,15 @@ function SidebarNavCollapsed({ items }: { items: NavItem[] }) {
             title={item.name}
             className={classNames(
               item.current
-                ? 'bg-gray-50 text-indigo-600'
-                : 'text-gray-700 hover:bg-gray-50 hover:text-indigo-600',
+                ? 'bg-gray-50 text-primary-500'
+                : 'text-gray-700 hover:bg-gray-50 hover:text-primary-500',
               'group flex rounded-md p-3 text-sm/6 font-semibold',
             )}
           >
             <item.icon
               aria-hidden="true"
               className={classNames(
-                item.current ? 'text-indigo-600' : 'text-gray-400 group-hover:text-indigo-600',
+                item.current ? 'text-primary-500' : 'text-gray-400 group-hover:text-primary-500',
                 'size-6 shrink-0',
               )}
             />
@@ -363,9 +400,9 @@ export default function DashboardPage() {
                   <li className="-mx-2 mt-auto">
                     <button
                       onClick={handleLogout}
-                      className="group flex w-full gap-x-3 rounded-md p-2 text-sm/6 font-semibold text-gray-700 hover:bg-gray-50 hover:text-indigo-600"
+                      className="group flex w-full gap-x-3 rounded-md p-2 text-sm/6 font-semibold text-gray-700 hover:bg-gray-50 hover:text-primary-500"
                     >
-                      <ArrowRightStartOnRectangleIcon aria-hidden="true" className="size-6 shrink-0 text-gray-400 group-hover:text-indigo-600" />
+                      <ArrowRightStartOnRectangleIcon aria-hidden="true" className="size-6 shrink-0 text-gray-400 group-hover:text-primary-500" />
                       Logout
                     </button>
                   </li>
@@ -395,17 +432,17 @@ export default function DashboardPage() {
                   <button
                     onClick={handleLogout}
                     title="Logout"
-                    className="group flex rounded-md p-3 text-gray-700 hover:bg-gray-50 hover:text-indigo-600"
+                    className="group flex rounded-md p-3 text-gray-700 hover:bg-gray-50 hover:text-primary-500"
                   >
-                    <ArrowRightStartOnRectangleIcon aria-hidden="true" className="size-6 shrink-0 text-gray-400 group-hover:text-indigo-600" />
+                    <ArrowRightStartOnRectangleIcon aria-hidden="true" className="size-6 shrink-0 text-gray-400 group-hover:text-primary-500" />
                     <span className="sr-only">Logout</span>
                   </button>
                   <button
                     onClick={() => setSidebarCollapsed(false)}
                     title="Expand sidebar"
-                    className="group flex rounded-md p-3 text-gray-700 hover:bg-gray-50 hover:text-indigo-600"
+                    className="group flex rounded-md p-3 text-gray-700 hover:bg-gray-50 hover:text-primary-500"
                   >
-                    <ChevronDoubleRightIcon aria-hidden="true" className="size-5 text-gray-400 group-hover:text-indigo-600" />
+                    <ChevronDoubleRightIcon aria-hidden="true" className="size-5 text-gray-400 group-hover:text-primary-500" />
                     <span className="sr-only">Expand sidebar</span>
                   </button>
                 </div>
@@ -419,7 +456,7 @@ export default function DashboardPage() {
                 <button
                   onClick={() => setSidebarCollapsed(true)}
                   title="Collapse sidebar"
-                  className="group rounded-md p-1 text-gray-400 hover:bg-gray-50 hover:text-indigo-600"
+                  className="group rounded-md p-1 text-gray-400 hover:bg-gray-50 hover:text-primary-500"
                 >
                   <ChevronDoubleLeftIcon aria-hidden="true" className="size-5" />
                   <span className="sr-only">Collapse sidebar</span>
@@ -439,9 +476,9 @@ export default function DashboardPage() {
                   <li className="-mx-2 mt-auto mb-4">
                     <button
                       onClick={handleLogout}
-                      className="group flex w-full gap-x-3 rounded-md p-2 text-sm/6 font-semibold text-gray-700 hover:bg-gray-50 hover:text-indigo-600"
+                      className="group flex w-full gap-x-3 rounded-md p-2 text-sm/6 font-semibold text-gray-700 hover:bg-gray-50 hover:text-primary-500"
                     >
-                      <ArrowRightStartOnRectangleIcon aria-hidden="true" className="size-6 shrink-0 text-gray-400 group-hover:text-indigo-600" />
+                      <ArrowRightStartOnRectangleIcon aria-hidden="true" className="size-6 shrink-0 text-gray-400 group-hover:text-primary-500" />
                       Logout
                     </button>
                   </li>
@@ -469,7 +506,7 @@ export default function DashboardPage() {
           <span className="sr-only">View notifications</span>
           <BellIcon aria-hidden="true" className="size-6" />
         </button>
-        <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-indigo-600 text-sm font-medium text-white">
+        <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-primary-500 text-sm font-medium text-white">
           {initials}
         </span>
       </div>
@@ -500,7 +537,7 @@ export default function DashboardPage() {
           </button>
           <div className="hidden lg:block lg:h-6 lg:w-px lg:bg-gray-200" aria-hidden="true" />
           <div className="flex items-center gap-x-3 -m-1.5 p-1.5">
-            <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-indigo-600 text-sm font-medium text-white">
+            <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-primary-500 text-sm font-medium text-white">
               {initials}
             </span>
             <span className="hidden lg:flex lg:flex-col lg:items-start">
@@ -514,6 +551,7 @@ export default function DashboardPage() {
       <main className={`lg:pt-16 transition-all duration-300 ${contentPadding}`}>
         <div className="xl:pr-96">
           <div className="px-4 py-10 sm:px-6 lg:px-8 lg:py-6">
+            {/* Page heading */}
             <div className="mb-8">
               <h2 className="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
                 Dashboard
@@ -523,23 +561,71 @@ export default function DashboardPage() {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-              <div className="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
-                <dt className="truncate text-sm font-medium text-gray-500">Total Orders</dt>
-                <dd className="mt-1 text-3xl font-semibold tracking-tight text-gray-900">0</dd>
-              </div>
-              <div className="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
-                <dt className="truncate text-sm font-medium text-gray-500">Active Projects</dt>
-                <dd className="mt-1 text-3xl font-semibold tracking-tight text-gray-900">0</dd>
-              </div>
-              <div className="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
-                <dt className="truncate text-sm font-medium text-gray-500">Pending Tasks</dt>
-                <dd className="mt-1 text-3xl font-semibold tracking-tight text-gray-900">0</dd>
-              </div>
-              <div className="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
-                <dt className="truncate text-sm font-medium text-gray-500">Revenue</dt>
-                <dd className="mt-1 text-3xl font-semibold tracking-tight text-gray-900">$0</dd>
-              </div>
+            {/* Stats section */}
+            <div>
+              <h3 className="text-base font-semibold text-gray-900">Overview — Last 30 days</h3>
+              <dl className="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+                {dashboardStats.map((item) => (
+                  <div
+                    key={item.id}
+                    className="relative overflow-hidden rounded-lg bg-white px-4 pt-5 pb-12 shadow-sm sm:px-6 sm:pt-6"
+                  >
+                    <dt>
+                      <div className={classNames(item.color, 'absolute rounded-md p-3')}>
+                        <item.icon aria-hidden="true" className="size-6 text-white" />
+                      </div>
+                      <p className="ml-16 truncate text-sm font-medium text-gray-500">{item.name}</p>
+                    </dt>
+                    <dd className="ml-16 flex items-baseline pb-6 sm:pb-7">
+                      <p className="text-2xl font-semibold text-gray-900">{item.stat}</p>
+                      <p
+                        className={classNames(
+                          item.changeType === 'increase' ? 'text-green-600' : 'text-red-600',
+                          'ml-2 flex items-baseline text-sm font-semibold',
+                        )}
+                      >
+                        {item.changeType === 'increase' ? (
+                          <ArrowUpIcon aria-hidden="true" className="size-5 shrink-0 self-center text-green-500" />
+                        ) : (
+                          <ArrowDownIcon aria-hidden="true" className="size-5 shrink-0 self-center text-red-500" />
+                        )}
+                        <span className="sr-only"> {item.changeType === 'increase' ? 'Increased' : 'Decreased'} by </span>
+                        {item.change}
+                      </p>
+                      <div className="absolute inset-x-0 bottom-0 bg-gray-50 px-4 py-4 sm:px-6">
+                        <div className="text-sm">
+                          <a href="#" className="font-medium text-primary-500 hover:text-primary-400">
+                            View details<span className="sr-only"> {item.name}</span>
+                          </a>
+                        </div>
+                      </div>
+                    </dd>
+                  </div>
+                ))}
+              </dl>
+            </div>
+
+            {/* Quick Links section */}
+            <div className="mt-10">
+              <h3 className="text-base font-semibold text-gray-900">Quick Links</h3>
+              <ul role="list" className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+                {quickLinks.map((link) => (
+                  <li key={link.name}>
+                    <a
+                      href={link.href}
+                      className="group flex items-center gap-x-3 rounded-lg border border-gray-200 bg-white p-3 shadow-sm hover:border-primary-400 hover:shadow-md transition-all"
+                    >
+                      <div className={classNames(link.bgColor, 'flex size-10 shrink-0 items-center justify-center rounded-lg')}>
+                        <link.icon aria-hidden="true" className="size-5 text-white" />
+                      </div>
+                      <div className="min-w-0">
+                        <p className="text-sm font-semibold text-gray-900 group-hover:text-primary-500">{link.name}</p>
+                        <p className="truncate text-xs text-gray-500">{link.description}</p>
+                      </div>
+                    </a>
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
         </div>
@@ -548,7 +634,50 @@ export default function DashboardPage() {
       {/* Secondary column on right */}
       <aside className="fixed top-16 bottom-0 right-0 hidden w-96 overflow-y-auto border-l border-gray-200 px-4 py-6 sm:px-6 lg:px-8 xl:block">
         <h3 className="text-sm font-semibold text-gray-900">Recent Activity</h3>
-        <p className="mt-2 text-sm text-gray-500">No recent activity to display.</p>
+        <div className="mt-4 flow-root">
+          <ul role="list" className="-mb-8">
+            {recentActivity.map((item, idx) => (
+              <li key={item.id}>
+                <div className="relative pb-8">
+                  {idx !== recentActivity.length - 1 && (
+                    <span aria-hidden="true" className="absolute top-4 left-4 -ml-px h-full w-0.5 bg-gray-200" />
+                  )}
+                  <div className="relative flex space-x-3">
+                    <div>
+                      <span className={classNames(
+                        item.type === 'sales' ? 'bg-primary-400' :
+                        item.type === 'payment' ? 'bg-green-500' :
+                        item.type === 'purchase' ? 'bg-amber-500' :
+                        item.type === 'inventory' ? 'bg-blue-500' :
+                        item.type === 'customer' ? 'bg-purple-500' :
+                        item.type === 'dispatch' ? 'bg-cyan-500' :
+                        'bg-gray-500',
+                        'flex size-8 items-center justify-center rounded-full ring-8 ring-white',
+                      )}>
+                        {item.type === 'sales' && <ShoppingCartIcon className="size-4 text-white" />}
+                        {item.type === 'payment' && <BanknotesIcon className="size-4 text-white" />}
+                        {item.type === 'purchase' && <ClipboardDocumentListIcon className="size-4 text-white" />}
+                        {item.type === 'inventory' && <CubeIcon className="size-4 text-white" />}
+                        {item.type === 'customer' && <UsersIcon className="size-4 text-white" />}
+                        {item.type === 'dispatch' && <TruckIcon className="size-4 text-white" />}
+                        {item.type === 'finance' && <CalculatorIcon className="size-4 text-white" />}
+                      </span>
+                    </div>
+                    <div className="flex min-w-0 flex-1 justify-between space-x-4">
+                      <div>
+                        <p className="text-sm text-gray-900">{item.action}</p>
+                        <p className="text-xs text-gray-500">{item.user}</p>
+                      </div>
+                      <div className="whitespace-nowrap text-right text-xs text-gray-500">
+                        {item.time}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
       </aside>
     </div>
   )

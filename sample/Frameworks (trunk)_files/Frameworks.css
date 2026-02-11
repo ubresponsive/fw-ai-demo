@@ -1,0 +1,48 @@
+body {
+    overflow: hidden;
+}
+
+.loadingIndicator {
+    border: 1px solid #353636;
+    width: 300px;
+    border-radius: 5px;
+    padding: 5px;
+    margin-left: auto;
+    margin-right: auto;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 20001;
+    display: flex;
+    align-items: center;
+}
+
+.loadingMsg {
+    font-size: 16px;
+    font-family: arial, sans-serif;
+    color: #353636;
+    font-weight: normal;
+}
+
+.loadingImg {
+    width: 50px; 
+    height: 50px;
+    margin-right: 8px; 
+    float: left; 
+    vertical-align: top;
+    padding: 16px;
+}
+
+.loadingErrors {
+    padding: 5px;
+    margin-left: auto;
+    margin-right: auto;
+    position: absolute;
+    left: 50%;
+    top: 60%;
+    transform: translate(-50%, -60%);
+    z-index: 20001;
+    display: flex;
+    align-items: center;
+}

@@ -1,0 +1,1 @@
+fluidSkin = 'Frameworks7';

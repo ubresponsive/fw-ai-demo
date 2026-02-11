@@ -480,14 +480,14 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
         <Dialog open={notificationsOpen} onClose={setNotificationsOpen} className="relative z-[60]">
           <DialogBackdrop
             transition
-            className="fixed inset-0 bg-gray-900/50 backdrop-blur-sm transition-all duration-300 ease-out data-closed:opacity-0 data-closed:backdrop-blur-none"
+            className="fixed inset-0 bg-gray-900/50 backdrop-blur-sm transition-all duration-500 ease-in-out data-closed:opacity-0 data-closed:backdrop-blur-none"
           />
           <div className="fixed inset-0 overflow-hidden">
             <div className="absolute inset-0 overflow-hidden">
               <div className="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10 sm:pl-16">
                 <DialogPanel
                   transition
-                  className="pointer-events-auto w-screen max-w-sm transform transition-transform duration-500 ease-out data-closed:translate-x-full data-closed:duration-300"
+                  className="pointer-events-auto w-screen max-w-sm transform transition-transform duration-700 ease-in-out data-closed:translate-x-full data-closed:duration-500"
                 >
                   <div className="flex h-full flex-col bg-white shadow-2xl">
                     {/* Header */}

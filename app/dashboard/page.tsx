@@ -14,6 +14,8 @@ import {
 import {
   Bars3Icon,
   BellIcon,
+  ChevronDoubleLeftIcon,
+  ChevronDoubleRightIcon,
   MagnifyingGlassIcon,
   XMarkIcon,
 } from '@heroicons/react/24/outline'
@@ -26,7 +28,6 @@ import {
   CubeIcon,
   TruckIcon,
   ClipboardDocumentListIcon,
-  WrenchScrewdriverIcon,
   BuildingStorefrontIcon,
   CalculatorIcon,
   TagIcon,
@@ -35,9 +36,6 @@ import {
   UserIcon,
   ArrowRightStartOnRectangleIcon,
 } from '@heroicons/react/24/outline'
-
-// Simplified ERP navigation derived from frameworks-menu.json
-// Grouped into core functional areas with key sub-items
 
 type NavChild = {
   name: string
@@ -201,19 +199,8 @@ function getInitials(name: string) {
   return name.slice(0, 2).toUpperCase()
 }
 
-function SidebarNav({
-  items,
-  onLogout,
-  userName,
-  initials,
-  showLogout = false,
-}: {
-  items: NavItem[]
-  onLogout?: () => void
-  userName?: string
-  initials?: string
-  showLogout?: boolean
-}) {
+// Expanded sidebar nav with labels and disclosure
+function SidebarNavExpanded({ items }: { items: NavItem[] }) {
   return (
     <ul role="list" className="-mx-2 space-y-1">
       {items.map((item) => (
@@ -278,9 +265,41 @@ function SidebarNav({
   )
 }
 
+// Collapsed sidebar nav — icon-only with tooltips
+function SidebarNavCollapsed({ items }: { items: NavItem[] }) {
+  return (
+    <ul role="list" className="flex flex-col items-center space-y-1">
+      {items.map((item) => (
+        <li key={item.name}>
+          <a
+            href={item.href || '#'}
+            title={item.name}
+            className={classNames(
+              item.current
+                ? 'bg-gray-50 text-indigo-600'
+                : 'text-gray-700 hover:bg-gray-50 hover:text-indigo-600',
+              'group flex rounded-md p-3 text-sm/6 font-semibold',
+            )}
+          >
+            <item.icon
+              aria-hidden="true"
+              className={classNames(
+                item.current ? 'text-indigo-600' : 'text-gray-400 group-hover:text-indigo-600',
+                'size-6 shrink-0',
+              )}
+            />
+            <span className="sr-only">{item.name}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  )
+}
+
 export default function DashboardPage() {
   const router = useRouter()
   const [sidebarOpen, setSidebarOpen] = useState(false)
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false)
   const [userName, setUserName] = useState('')
   const [userEmail, setUserEmail] = useState('')
 
@@ -300,52 +319,13 @@ export default function DashboardPage() {
   }
 
   const initials = getInitials(userName)
-
-  const sidebarContent = (
-    <>
-      <div className="flex h-16 shrink-0 items-center">
-        <img
-          alt="Frameworks"
-          src="/frameworks-logo.svg"
-          className="h-8 w-auto"
-        />
-      </div>
-      <nav className="flex flex-1 flex-col">
-        <ul role="list" className="flex flex-1 flex-col gap-y-7">
-          {/* Main navigation */}
-          <li>
-            <SidebarNav items={navigation} />
-          </li>
-
-          {/* Admin & Settings section */}
-          <li>
-            <div className="text-xs/6 font-semibold text-gray-400">System</div>
-            <div className="mt-2">
-              <SidebarNav items={bottomNav} />
-            </div>
-          </li>
-
-          {/* Logout */}
-          <li className="-mx-2 mt-auto">
-            <button
-              onClick={handleLogout}
-              className="group flex w-full gap-x-3 rounded-md p-2 text-sm/6 font-semibold text-gray-700 hover:bg-gray-50 hover:text-indigo-600"
-            >
-              <ArrowRightStartOnRectangleIcon
-                aria-hidden="true"
-                className="size-6 shrink-0 text-gray-400 group-hover:text-indigo-600"
-              />
-              Logout
-            </button>
-          </li>
-        </ul>
-      </nav>
-    </>
-  )
+  const sidebarWidth = sidebarCollapsed ? 'lg:w-20' : 'lg:w-72'
+  const contentPadding = sidebarCollapsed ? 'lg:pl-20' : 'lg:pl-72'
+  const headerLeft = sidebarCollapsed ? 'lg:left-20' : 'lg:left-72'
 
   return (
     <div>
-      {/* Mobile sidebar */}
+      {/* Mobile sidebar — always expanded */}
       <Dialog open={sidebarOpen} onClose={setSidebarOpen} className="relative z-50 lg:hidden">
         <DialogBackdrop
           transition
@@ -366,16 +346,109 @@ export default function DashboardPage() {
             </TransitionChild>
 
             <div className="flex grow flex-col gap-y-5 overflow-y-auto bg-white px-6 pb-4">
-              {sidebarContent}
+              <div className="flex h-16 shrink-0 items-center">
+                <img alt="Frameworks" src="/frameworks-logo.svg" className="h-8 w-auto" />
+              </div>
+              <nav className="flex flex-1 flex-col">
+                <ul role="list" className="flex flex-1 flex-col gap-y-7">
+                  <li>
+                    <SidebarNavExpanded items={navigation} />
+                  </li>
+                  <li>
+                    <div className="text-xs/6 font-semibold text-gray-400">System</div>
+                    <div className="mt-2">
+                      <SidebarNavExpanded items={bottomNav} />
+                    </div>
+                  </li>
+                  <li className="-mx-2 mt-auto">
+                    <button
+                      onClick={handleLogout}
+                      className="group flex w-full gap-x-3 rounded-md p-2 text-sm/6 font-semibold text-gray-700 hover:bg-gray-50 hover:text-indigo-600"
+                    >
+                      <ArrowRightStartOnRectangleIcon aria-hidden="true" className="size-6 shrink-0 text-gray-400 group-hover:text-indigo-600" />
+                      Logout
+                    </button>
+                  </li>
+                </ul>
+              </nav>
             </div>
           </DialogPanel>
         </div>
       </Dialog>
 
-      {/* Static sidebar for desktop */}
-      <div className="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-72 lg:flex-col">
-        <div className="flex grow flex-col gap-y-5 overflow-y-auto border-r border-gray-200 bg-white px-6">
-          {sidebarContent}
+      {/* Desktop sidebar */}
+      <div className={`hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:flex-col transition-all duration-300 ${sidebarWidth}`}>
+        <div className="flex grow flex-col overflow-y-auto border-r border-gray-200 bg-white">
+          {sidebarCollapsed ? (
+            /* ── Collapsed state ── */
+            <>
+              <div className="flex h-16 shrink-0 items-center justify-center">
+                <img alt="Frameworks" src="/favicon.ico" className="size-8" />
+              </div>
+              <nav className="mt-2 flex flex-1 flex-col items-center">
+                <SidebarNavCollapsed items={navigation} />
+                <div className="mt-6 w-8 border-t border-gray-200" />
+                <div className="mt-6">
+                  <SidebarNavCollapsed items={bottomNav} />
+                </div>
+                <div className="mt-auto mb-4 flex flex-col items-center gap-y-2">
+                  <button
+                    onClick={handleLogout}
+                    title="Logout"
+                    className="group flex rounded-md p-3 text-gray-700 hover:bg-gray-50 hover:text-indigo-600"
+                  >
+                    <ArrowRightStartOnRectangleIcon aria-hidden="true" className="size-6 shrink-0 text-gray-400 group-hover:text-indigo-600" />
+                    <span className="sr-only">Logout</span>
+                  </button>
+                  <button
+                    onClick={() => setSidebarCollapsed(false)}
+                    title="Expand sidebar"
+                    className="group flex rounded-md p-3 text-gray-700 hover:bg-gray-50 hover:text-indigo-600"
+                  >
+                    <ChevronDoubleRightIcon aria-hidden="true" className="size-5 text-gray-400 group-hover:text-indigo-600" />
+                    <span className="sr-only">Expand sidebar</span>
+                  </button>
+                </div>
+              </nav>
+            </>
+          ) : (
+            /* ── Expanded state ── */
+            <>
+              <div className="flex h-16 shrink-0 items-center justify-between px-6">
+                <img alt="Frameworks" src="/frameworks-logo.svg" className="h-8 w-auto" />
+                <button
+                  onClick={() => setSidebarCollapsed(true)}
+                  title="Collapse sidebar"
+                  className="group rounded-md p-1 text-gray-400 hover:bg-gray-50 hover:text-indigo-600"
+                >
+                  <ChevronDoubleLeftIcon aria-hidden="true" className="size-5" />
+                  <span className="sr-only">Collapse sidebar</span>
+                </button>
+              </div>
+              <nav className="flex flex-1 flex-col px-6">
+                <ul role="list" className="flex flex-1 flex-col gap-y-7">
+                  <li>
+                    <SidebarNavExpanded items={navigation} />
+                  </li>
+                  <li>
+                    <div className="text-xs/6 font-semibold text-gray-400">System</div>
+                    <div className="mt-2">
+                      <SidebarNavExpanded items={bottomNav} />
+                    </div>
+                  </li>
+                  <li className="-mx-2 mt-auto mb-4">
+                    <button
+                      onClick={handleLogout}
+                      className="group flex w-full gap-x-3 rounded-md p-2 text-sm/6 font-semibold text-gray-700 hover:bg-gray-50 hover:text-indigo-600"
+                    >
+                      <ArrowRightStartOnRectangleIcon aria-hidden="true" className="size-6 shrink-0 text-gray-400 group-hover:text-indigo-600" />
+                      Logout
+                    </button>
+                  </li>
+                </ul>
+              </nav>
+            </>
+          )}
         </div>
       </div>
 
@@ -402,7 +475,7 @@ export default function DashboardPage() {
       </div>
 
       {/* Desktop header bar */}
-      <div className="hidden lg:fixed lg:left-72 lg:right-0 lg:top-0 lg:z-40 lg:flex lg:h-16 lg:items-center lg:gap-x-4 lg:border-b lg:border-gray-200 lg:bg-white lg:px-8">
+      <div className={`hidden lg:fixed lg:right-0 lg:top-0 lg:z-40 lg:flex lg:h-16 lg:items-center lg:gap-x-4 lg:border-b lg:border-gray-200 lg:bg-white lg:px-8 transition-all duration-300 ${headerLeft}`}>
         {/* Search */}
         <div className="flex flex-1 items-center gap-x-4 lg:gap-x-6">
           <div className="relative flex flex-1">
@@ -425,11 +498,7 @@ export default function DashboardPage() {
             <span className="sr-only">View notifications</span>
             <BellIcon aria-hidden="true" className="size-6" />
           </button>
-
-          {/* Separator */}
           <div className="hidden lg:block lg:h-6 lg:w-px lg:bg-gray-200" aria-hidden="true" />
-
-          {/* User avatar */}
           <div className="flex items-center gap-x-3 -m-1.5 p-1.5">
             <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-indigo-600 text-sm font-medium text-white">
               {initials}
@@ -442,7 +511,7 @@ export default function DashboardPage() {
       </div>
 
       {/* Main content area */}
-      <main className="lg:pl-72 lg:pt-16">
+      <main className={`lg:pt-16 transition-all duration-300 ${contentPadding}`}>
         <div className="xl:pr-96">
           <div className="px-4 py-10 sm:px-6 lg:px-8 lg:py-6">
             <div className="mb-8">

@@ -253,15 +253,15 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
         <Dialog open={sidebarOpen} onClose={setSidebarOpen} className="relative z-50 lg:hidden">
           <DialogBackdrop
             transition
-            className="fixed inset-0 bg-gray-900/80 transition-opacity duration-300 ease-linear data-closed:opacity-0"
+            className="fixed inset-0 bg-gray-900/80 transition-opacity duration-300 ease-linear data-[closed]:opacity-0"
           />
           <div className="fixed inset-0 flex">
             <DialogPanel
               transition
-              className="relative mr-16 flex w-full max-w-xs flex-1 transform transition duration-300 ease-in-out data-closed:-translate-x-full"
+              className="relative mr-16 flex w-full max-w-xs flex-1 transform transition duration-300 ease-in-out data-[closed]:-translate-x-full"
             >
               <TransitionChild>
-                <div className="absolute top-0 left-full flex w-16 justify-center pt-5 duration-300 ease-in-out data-closed:opacity-0">
+                <div className="absolute top-0 left-full flex w-16 justify-center pt-5 duration-300 ease-in-out data-[closed]:opacity-0">
                   <button type="button" onClick={() => setSidebarOpen(false)} className="-m-2.5 p-2.5">
                     <span className="sr-only">Close sidebar</span>
                     <XMarkIcon aria-hidden="true" className="size-6 text-white" />
@@ -480,14 +480,14 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
         <Dialog open={notificationsOpen} onClose={setNotificationsOpen} className="relative z-[60]">
           <DialogBackdrop
             transition
-            className="fixed inset-0 bg-gray-900/50 backdrop-blur-sm transition-all duration-500 ease-in-out data-closed:opacity-0 data-closed:backdrop-blur-none"
+            className="fixed inset-0 bg-gray-900/50 backdrop-blur-sm transition-all duration-500 ease-in-out data-[closed]:opacity-0 data-[closed]:backdrop-blur-none"
           />
           <div className="fixed inset-0 overflow-hidden">
             <div className="absolute inset-0 overflow-hidden">
               <div className="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10 sm:pl-16">
                 <DialogPanel
                   transition
-                  className="pointer-events-auto w-screen max-w-sm transform transition-transform duration-700 ease-in-out data-closed:translate-x-full data-closed:duration-500"
+                  className="pointer-events-auto w-screen max-w-sm transform transition-transform duration-700 ease-in-out data-[closed]:translate-x-full data-[closed]:duration-500"
                 >
                   <div className="flex h-full flex-col bg-white shadow-2xl">
                     {/* Header */}

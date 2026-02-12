@@ -69,6 +69,7 @@ module.exports = {
       },
       animation: {
         sparkle: 'sparkle 1.5s ease-in-out infinite',
+        'sparkle-3': 'sparkle 1.5s ease-in-out 3',
         'bell-ring': 'bell-ring 1s ease-in-out infinite',
       },
     },

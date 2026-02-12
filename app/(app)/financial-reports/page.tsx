@@ -226,7 +226,7 @@ export default function FinancialReportsPage() {
             </div>
             <button
               onClick={() => setAiOpen(true)}
-              className="inline-flex items-center gap-1.5 px-4 py-1.5 text-xs font-semibold rounded-lg text-white bg-tertiary-500 hover:bg-tertiary-600 transition-all shadow-sm animate-[sparkle_1.5s_ease-in-out_infinite]"
+              className="inline-flex items-center gap-1.5 px-4 py-1.5 text-xs font-semibold rounded-lg text-white bg-tertiary-500 hover:bg-tertiary-600 transition-all shadow-sm animate-sparkle-3"
             >
               <SparklesIcon className="size-3.5" />
               AI Report Builder
@@ -409,21 +409,21 @@ export default function FinancialReportsPage() {
       <Dialog open={aiOpen} onClose={setAiOpen} className="relative z-[60]">
         <DialogBackdrop
           transition
-          className="fixed inset-0 bg-gray-900/50 backdrop-blur-sm transition-all duration-500 ease-in-out data-closed:opacity-0 data-closed:backdrop-blur-none"
+          className="fixed inset-0 bg-gray-900/50 backdrop-blur-sm transition-all duration-500 ease-in-out data-[closed]:opacity-0 data-[closed]:backdrop-blur-none"
         />
         <div className="fixed inset-0 overflow-hidden">
           <div className="absolute inset-0 overflow-hidden">
             <div className="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10 sm:pl-16">
               <DialogPanel
                 transition
-                className="pointer-events-auto w-screen max-w-md transform transition-transform duration-700 ease-in-out data-closed:translate-x-full data-closed:duration-500"
+                className="pointer-events-auto w-screen max-w-md transform transition-transform duration-700 ease-in-out data-[closed]:translate-x-full data-[closed]:duration-500"
               >
                 <div className="flex h-full flex-col bg-white shadow-2xl">
                   {/* Drawer Header */}
                   <div className="flex items-center justify-between px-4 py-3 border-b border-gray-100 shrink-0">
                     <div className="flex items-center gap-2.5">
                       <div className="size-8 rounded-xl flex items-center justify-center bg-gradient-to-br from-tertiary-400 to-primary-500">
-                        <SparklesIcon className="size-4 text-white" />
+                        <SparklesIcon className="size-4 text-white animate-sparkle" />
                       </div>
                       <div>
                         <DialogTitle className="text-sm font-semibold text-gray-800">AI Report Builder</DialogTitle>
@@ -456,7 +456,7 @@ export default function FinancialReportsPage() {
                     {/* AI Welcome */}
                     <div className="flex gap-2.5">
                       <div className="size-6 rounded-full flex items-center justify-center shrink-0 mt-0.5 bg-tertiary-50">
-                        <SparklesIcon className="size-3.5 text-tertiary-500" />
+                        <SparklesIcon className="size-3.5 text-tertiary-500 animate-sparkle" />
                       </div>
                       <div className="flex-1">
                         <div className="bg-gray-50 rounded-xl rounded-tl-sm px-3 py-2.5 text-xs text-gray-700 leading-relaxed">
@@ -476,7 +476,7 @@ export default function FinancialReportsPage() {
                     {/* AI Generated Report */}
                     <div className="flex gap-2.5">
                       <div className="size-6 rounded-full flex items-center justify-center shrink-0 mt-0.5 bg-tertiary-50">
-                        <SparklesIcon className="size-3.5 text-tertiary-500" />
+                        <SparklesIcon className="size-3.5 text-tertiary-500 animate-sparkle" />
                       </div>
                       <div className="flex-1">
                         <div className="bg-gray-50 rounded-xl rounded-tl-sm px-3 py-2.5 text-xs text-gray-700 leading-relaxed">

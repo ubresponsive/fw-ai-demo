@@ -417,7 +417,7 @@ export default function SalesOrderDetailPage() {
                 'inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg transition-all border group',
               )}
             >
-              <SparklesIcon className="size-4 animate-[sparkle_1.5s_ease-in-out_infinite]" />
+              <SparklesIcon className="size-4 animate-sparkle-3" />
               AI Assistant
             </button>
 
@@ -1037,21 +1037,21 @@ export default function SalesOrderDetailPage() {
       <Dialog open={aiOpen} onClose={setAiOpen} className="relative z-[60]">
         <DialogBackdrop
           transition
-          className="fixed inset-0 bg-gray-900/50 backdrop-blur-sm transition-all duration-500 ease-in-out data-closed:opacity-0 data-closed:backdrop-blur-none"
+          className="fixed inset-0 bg-gray-900/50 backdrop-blur-sm transition-all duration-500 ease-in-out data-[closed]:opacity-0 data-[closed]:backdrop-blur-none"
         />
         <div className="fixed inset-0 overflow-hidden">
           <div className="absolute inset-0 overflow-hidden">
             <div className="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10 sm:pl-16">
               <DialogPanel
                 transition
-                className="pointer-events-auto w-screen max-w-md transform transition-transform duration-700 ease-in-out data-closed:translate-x-full data-closed:duration-500"
+                className="pointer-events-auto w-screen max-w-md transform transition-transform duration-700 ease-in-out data-[closed]:translate-x-full data-[closed]:duration-500"
               >
                 <div className="flex h-full flex-col bg-white shadow-2xl">
                   {/* Panel Header */}
                   <div className="flex items-center justify-between px-4 py-3 border-b border-gray-100">
                     <div className="flex items-center gap-2">
                       <div className="size-7 rounded-lg flex items-center justify-center bg-tertiary-50">
-                        <SparklesIcon className="size-4 text-tertiary-500" />
+                        <SparklesIcon className="size-4 text-tertiary-500 animate-sparkle" />
                       </div>
                       <div>
                         <DialogTitle className="text-sm font-semibold text-gray-800">AI Assistant</DialogTitle>
@@ -1091,7 +1091,7 @@ export default function SalesOrderDetailPage() {
                     {/* AI Welcome */}
                     <div className="flex gap-2.5">
                       <div className="size-6 rounded-full flex items-center justify-center shrink-0 mt-0.5 bg-tertiary-50">
-                        <SparklesIcon className="size-3.5 text-tertiary-500" />
+                        <SparklesIcon className="size-3.5 text-tertiary-500 animate-sparkle" />
                       </div>
                       <div className="flex-1">
                         <div className="bg-gray-50 rounded-xl rounded-tl-sm px-3 py-2.5 text-xs text-gray-700 leading-relaxed">
@@ -1121,7 +1121,7 @@ export default function SalesOrderDetailPage() {
                     {/* AI Response with Chart */}
                     <div className="flex gap-2.5">
                       <div className="size-6 rounded-full flex items-center justify-center shrink-0 mt-0.5 bg-tertiary-50">
-                        <SparklesIcon className="size-3.5 text-tertiary-500" />
+                        <SparklesIcon className="size-3.5 text-tertiary-500 animate-sparkle" />
                       </div>
                       <div className="flex-1">
                         <div className="bg-gray-50 rounded-xl rounded-tl-sm px-3 py-2.5 text-xs text-gray-700 leading-relaxed">
@@ -1171,7 +1171,7 @@ export default function SalesOrderDetailPage() {
                     {/* Confirmation Preview */}
                     <div className="flex gap-2.5">
                       <div className="size-6 rounded-full flex items-center justify-center shrink-0 mt-0.5 bg-tertiary-50">
-                        <SparklesIcon className="size-3.5 text-tertiary-500" />
+                        <SparklesIcon className="size-3.5 text-tertiary-500 animate-sparkle" />
                       </div>
                       <div className="flex-1">
                         <div className="rounded-xl border-2 border-dashed border-secondary-400 bg-secondary-50/30 px-3 py-2.5 text-xs">

@@ -604,8 +604,8 @@ export default function FinancialReportsPage() {
                   {/* Drawer Header */}
                   <div className="flex items-center justify-between px-4 py-3 border-b border-gray-100 dark:border-slate-700 shrink-0">
                     <div className="flex items-center gap-2.5">
-                      <div className="size-8 rounded-xl flex items-center justify-center bg-gradient-to-br from-tertiary-400 to-primary-500">
-                        <SparklesIcon className="size-4 text-white animate-sparkle" />
+                      <div className="size-8 rounded-xl flex items-center justify-center bg-tertiary-50 dark:bg-tertiary-500/20">
+                        <SparklesIcon className="size-4 text-tertiary-500 dark:text-tertiary-400 animate-sparkle" />
                       </div>
                       <div>
                         <DialogTitle className="text-sm font-semibold text-gray-900 dark:text-slate-100">AI Report Builder</DialogTitle>

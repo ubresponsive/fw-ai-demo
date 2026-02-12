@@ -328,6 +328,15 @@ export default function DashboardPage() {
                 ))}
               </div>
             </div>
+            <div className="mt-3 flex justify-end">
+              <a
+                href="/financial-reports"
+                className="group inline-flex items-center gap-1 text-sm font-medium text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 transition-colors"
+              >
+                View more reports
+                <ChevronRightIcon className="size-4 transition-transform group-hover:translate-x-0.5" />
+              </a>
+            </div>
           </div>
 
           {/* Quick Links section */}

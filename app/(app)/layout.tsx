@@ -49,7 +49,7 @@ import {
   PaperClipIcon,
   LightBulbIcon,
 } from '@heroicons/react/24/outline'
-import { ChevronRightIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid'
+import { ChevronRightIcon, ChevronUpDownIcon, ChevronDownIcon } from '@heroicons/react/20/solid'
 import { navigation, bottomNav, type NavItem } from '@/lib/navigation'
 import { classNames, getInitials } from '@/lib/utils'
 import { AppShellContext } from '@/lib/app-shell-context'
@@ -468,6 +468,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
   const [selectedArticle, setSelectedArticle] = useState<HelpArticle | null>(null)
   const [helpTab, setHelpTab] = useState<'articles' | 'ai'>('articles')
   const [helpAiInput, setHelpAiInput] = useState('')
+  const [mobileContextOpen, setMobileContextOpen] = useState(false)
 
   useEffect(() => {
     const isAuthenticated = sessionStorage.getItem('isAuthenticated')
@@ -689,8 +690,9 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
           </div>
         </div>
 
-        {/* Mobile top bar */}
-        <div className="sticky top-0 z-40 flex items-center gap-x-6 bg-white px-4 py-4 shadow-sm sm:px-6 lg:hidden">
+        {/* Mobile top bar + context strip wrapper */}
+        <div className="sticky top-0 z-40 lg:hidden shadow-sm">
+        <div className="flex items-center gap-x-6 bg-white dark:bg-slate-900 px-4 py-4 sm:px-6">
           <button
             type="button"
             onClick={() => setSidebarOpen(true)}
@@ -719,9 +721,71 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
               </span>
             )}
           </button>
-          <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-primary-500 text-sm font-medium text-white">
-            {initials}
-          </span>
+          <button
+            type="button"
+            onClick={() => setMobileContextOpen(!mobileContextOpen)}
+            className="flex items-center gap-1 -m-1 p-1 rounded-full"
+            aria-expanded={mobileContextOpen}
+            aria-label="Toggle context info"
+          >
+            <span className={classNames(
+              'flex size-8 shrink-0 items-center justify-center rounded-full bg-primary-500 text-sm font-medium text-white transition-shadow',
+              mobileContextOpen ? 'ring-2 ring-primary-300 dark:ring-primary-400' : '',
+            )}>
+              {initials}
+            </span>
+            <ChevronDownIcon className={classNames(
+              'size-4 text-gray-400 transition-transform duration-200',
+              mobileContextOpen ? 'rotate-180' : '',
+            )} />
+          </button>
+        </div>
+
+        {/* Mobile context strip */}
+        <div className={classNames(
+          'overflow-hidden transition-all duration-300 ease-in-out',
+          mobileContextOpen ? 'max-h-40 opacity-100' : 'max-h-0 opacity-0',
+        )}>
+          <div className="flex flex-wrap items-center gap-x-3 gap-y-2 border-t border-b border-gray-200 dark:border-slate-700 bg-gray-50 dark:bg-slate-800 px-4 py-2.5 text-sm">
+            <span className="font-semibold text-gray-900 dark:text-slate-100 text-xs">TEST COMPANY 01</span>
+            <span className="text-gray-300 dark:text-slate-600" aria-hidden="true">&middot;</span>
+            <Listbox value={selectedBranch} onChange={setSelectedBranch}>
+              <div className="relative">
+                <ListboxButton className="flex items-center gap-0.5 text-xs text-gray-600 dark:text-slate-400 hover:text-gray-900 dark:hover:text-slate-100 cursor-pointer rounded px-1 py-0.5 -mx-1 hover:bg-white dark:hover:bg-slate-700 transition-colors">
+                  Branch: {selectedBranch}
+                  <ChevronUpDownIcon className="size-3.5 text-gray-400 dark:text-slate-500" />
+                </ListboxButton>
+                <ListboxOptions
+                  transition
+                  className="absolute top-full left-0 z-50 mt-1 max-h-60 w-36 overflow-auto rounded-lg bg-white dark:bg-slate-800 py-1 shadow-lg ring-1 ring-black/5 focus:outline-none text-sm transition duration-100 ease-out data-[closed]:scale-95 data-[closed]:opacity-0"
+                >
+                  {Array.from({ length: 10 }, (_, i) => i + 1).map((branch) => (
+                    <ListboxOption
+                      key={branch}
+                      value={branch}
+                      className="relative cursor-pointer select-none px-3 py-1.5 text-gray-700 dark:text-slate-300 data-[focus]:bg-primary-50 dark:data-[focus]:bg-slate-700 data-[focus]:text-primary-700 dark:data-[focus]:text-primary-300 data-[selected]:font-semibold"
+                    >
+                      Branch {branch}
+                    </ListboxOption>
+                  ))}
+                </ListboxOptions>
+              </div>
+            </Listbox>
+            <span className="text-gray-300 dark:text-slate-600" aria-hidden="true">&middot;</span>
+            <span className="text-xs text-gray-500 dark:text-slate-400">Device: roam10</span>
+            <span className="text-gray-300 dark:text-slate-600" aria-hidden="true">&middot;</span>
+            <ThemeToggle />
+            <span className="text-gray-300 dark:text-slate-600" aria-hidden="true">&middot;</span>
+            <button
+              onClick={() => { setHelpOpen(true); setSelectedArticle(null); setHelpTag('All'); setHelpTab('articles') }}
+              title="Help"
+              className="rounded p-0.5 text-gray-400 dark:text-slate-500 hover:text-primary-500 dark:hover:text-primary-400"
+            >
+              <QuestionMarkCircleIcon aria-hidden="true" className="size-5" />
+              <span className="sr-only">Help</span>
+            </button>
+          </div>
+        </div>
         </div>
 
         {/* Desktop header bar */}

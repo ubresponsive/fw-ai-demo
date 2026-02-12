@@ -614,7 +614,10 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
 
         {/* Desktop sidebar */}
         <div className={`hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:flex-col transition-all duration-300 ${sidebarWidth}`}>
-          <div className="flex grow flex-col overflow-y-auto border-r border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-900">
+          <div className={classNames(
+            'flex grow flex-col border-r border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-900',
+            sidebarCollapsed ? 'overflow-visible' : 'overflow-y-auto',
+          )}>
             {sidebarCollapsed ? (
               <>
                 <div className="flex h-16 shrink-0 items-center justify-center">
@@ -1017,8 +1020,8 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
                               <ArrowLeftIcon className="size-4 text-gray-500 dark:text-slate-400" />
                             </button>
                           ) : helpTab === 'ai' ? (
-                            <div className="size-7 rounded-lg flex items-center justify-center bg-gradient-to-br from-tertiary-400 to-primary-500">
-                              <SparklesIcon className="size-4 text-white animate-sparkle" />
+                            <div className="size-7 rounded-lg flex items-center justify-center bg-tertiary-50 dark:bg-tertiary-500/20">
+                              <SparklesIcon className="size-4 text-tertiary-500 dark:text-tertiary-400 animate-sparkle" />
                             </div>
                           ) : (
                             <div className="size-7 rounded-lg flex items-center justify-center bg-primary-50 dark:bg-primary-900/20">

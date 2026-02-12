@@ -196,6 +196,17 @@ export default function FinancialReportsPage() {
 
   return (
     <div className="min-h-full">
+      {/* SVG gradient defs for sparkle icons */}
+      <svg className="absolute size-0" aria-hidden="true">
+        <defs>
+          <linearGradient id="sparkle-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#fbbf24" />
+            <stop offset="50%" stopColor="#f9a8d4" />
+            <stop offset="100%" stopColor="#c084fc" />
+          </linearGradient>
+        </defs>
+      </svg>
+
       {/* ── Breadcrumb ── */}
       <div className="border-b border-gray-200 bg-white px-4 py-3 sm:px-6 lg:px-8">
         <nav className="flex items-center gap-1.5 text-sm text-gray-500">
@@ -226,9 +237,9 @@ export default function FinancialReportsPage() {
             </div>
             <button
               onClick={() => setAiOpen(true)}
-              className="inline-flex items-center gap-1.5 px-4 py-1.5 text-xs font-semibold rounded-lg text-white bg-tertiary-500 hover:bg-tertiary-600 transition-all shadow-sm animate-sparkle-3"
+              className="inline-flex items-center gap-1.5 px-4 py-1.5 text-xs font-semibold rounded-lg text-white bg-tertiary-500 hover:bg-tertiary-600 transition-all shadow-sm"
             >
-              <SparklesIcon className="size-3.5" />
+              <SparklesIcon className="size-3.5 animate-sparkle-3" style={{ stroke: 'url(#sparkle-gradient)' }} />
               AI Report Builder
             </button>
           </div>

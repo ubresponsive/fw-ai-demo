@@ -86,6 +86,9 @@ function SidebarNavExpanded({ items }: { items: NavItem[] }) {
                 )}
               />
               {item.name}
+              {item.href && item.href !== '#' && (
+                <span className="size-1.5 rounded-full bg-tertiary-400 shrink-0" />
+              )}
             </a>
           ) : (
             <Disclosure as="div" defaultOpen={item.current}>
@@ -117,10 +120,13 @@ function SidebarNavExpanded({ items }: { items: NavItem[] }) {
                         subItem.current
                           ? 'bg-gray-50 text-primary-500 font-semibold'
                           : 'text-gray-700 hover:bg-gray-50 hover:text-primary-500',
-                        'block rounded-md py-2 pr-2 pl-11 text-sm/6',
+                        'flex items-center gap-1.5 rounded-md py-2 pr-2 pl-11 text-sm/6',
                       )}
                     >
                       {subItem.name}
+                      {subItem.href !== '#' && (
+                        <span className="size-1.5 rounded-full bg-tertiary-400 shrink-0" />
+                      )}
                     </a>
                   </li>
                 ))}
